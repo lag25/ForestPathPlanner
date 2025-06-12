@@ -2,20 +2,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 import time
-import pathfinder # Import your newly compiled C++ module!
+import pathfinder # My C++ based path finding module
 from threshold import IsoGrayThresh
 
 def main():
     # --- Configuration ---
-    IMAGE_PATH = 'img3.jpeg'  # <--- CHANGE THIS
-    START_PIXEL = (0, 0)
+    IMAGE_PATH = 'img3.jpeg'  # <--- CHANGE THIS TO WHATEVER IMAGE YOU WANT I SWEAR I WILL ADD A NEATER METHOD FOR INPUT LATER 
+    START_PIXEL = (0, 0) # <--- WHATEVER START PIXEL YOU WANT AS LONG AS ITS WITHIN THE DIMENSIONS OF THE IMAGE 
     
     # --- Load Image ---
     try:
         # Open the image and convert to grayscale
         img = plt.imread(IMAGE_PATH)
         img = IsoGrayThresh(img)
-        #img = Image.open(IMAGE_PATH).convert('L')
         img = Image.fromarray(img).convert('L')
         img_array = np.array(img)
         
@@ -53,7 +52,7 @@ def main():
         print("No path was found.")
         return
 
-    # --- Visualization (using Python's strengths) ---
+    # --- Visualization ---
     print(f"Path found with {len(shortest_path)} points. Visualizing...")
     x_coords, y_coords = zip(*shortest_path)  # Extract x, y coordinates
 
